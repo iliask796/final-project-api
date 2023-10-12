@@ -22,9 +22,9 @@ If there is plenty of time the desired end-goal could be something that resemble
 ![trello-example-img](assets/trello-1-1400x951.png)
 
 ### ER Diagram
-A user has an email, a username and a password. A user can have one workspace. A workspace has a name.
-A workspace can contain many task lists. A task list has a name and an order. Each task list consists
-of different tasks. A task has a name, a description and an order.
+A user has an email, a password and a display name. A user can have one workspace. A workspace has a 
+name and a due date for its project. A workspace can contain many task lists. A task list has a name 
+and an order. Each task list consists of different tasks. A task has a name, an order and a description.
 <br><br>
 ![er-diagram-img](assets/ER_Diagram.png)
 
