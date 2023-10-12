@@ -1,4 +1,4 @@
-# Final Project (Oct. 12 - Oct 30)
+# Final Project (Oct. 12 - Oct 31)
 This is going to serve as a planning reference for my project. I am planning to work on a Project
 Management Tool. I am going to build a Spring Boot Application that will implement an API which will
 get data from a mySQL Local Server and provide them to my React App.
