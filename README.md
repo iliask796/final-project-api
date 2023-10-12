@@ -34,9 +34,9 @@ and an order. Each task list consists of different tasks. A task has a name, an 
 - GET /users/{id} <br> Get a specific user by his id.
 #### Workspaces
 - POST /users/{id}/workspaces <br> Create a new workspace for the user of this id.
-- GET /users/{id}/workspaces <br> Get the workspace of a user by his id.
-- PUT /users/{id}//workspaces <br> Update the workspace of a user by his id.
-- DELETE /users/{id}/workspaces <br> Delete the workspace of a user by his id.
+- GET /workspaces/{id} <br> Get the workspace of a user by his id.
+- PUT /workspaces/{id} <br> Update the workspace of a user by his id.
+- DELETE /workspaces/{id} <br> Delete the workspace of a user by his id.
 #### Tasklists
 - POST /workspaces/{id}/tasklists <br> Create a new tasklist for the workspace of this id.
 - GET /workspaces/{id}/tasklists <br> Get all tasklists of a workspace by its id.
