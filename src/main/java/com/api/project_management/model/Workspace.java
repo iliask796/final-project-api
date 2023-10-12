@@ -7,12 +7,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @NoArgsConstructor
 @Data
 @Entity
 @Table(name = "workspaces")
-@JsonIgnoreProperties({"user"})
+@JsonIgnoreProperties({"user","tasklists"})
 public class Workspace {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,4 +25,6 @@ public class Workspace {
     @OneToOne
     @JoinColumn(name = "userId", referencedColumnName = "userId")
     User user;
+    @OneToMany(mappedBy = "workspace", orphanRemoval = true)
+    List<Tasklist> tasklists;
 }
