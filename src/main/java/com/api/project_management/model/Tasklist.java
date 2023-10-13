@@ -5,11 +5,13 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @NoArgsConstructor
 @Data
 @Entity
 @Table(name = "tasklists")
-@JsonIgnoreProperties({"workspace"})
+@JsonIgnoreProperties({"workspace","tasks"})
 public class Tasklist {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,4 +23,6 @@ public class Tasklist {
     @ManyToOne
     @JoinColumn(name = "workspaceId", referencedColumnName = "workspaceId")
     Workspace workspace;
+    @OneToMany(mappedBy = "tasklist", orphanRemoval = true)
+    List<Task> tasks;
 }
