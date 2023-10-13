@@ -1,30 +1,18 @@
 # Final Project (Oct. 12 - Oct 31)
-This is going to serve as a planning reference for my project. I am planning to work on a Project
-Management Tool. I am going to build a Spring Boot Application that will implement an API which will
-get data from a mySQL Local Server and provide them to my React App.
+This is going to serve as a planning reference for my project. I am planning to work on a **Project
+Management Tool**. I am going to build a Spring Boot Application that will implement an API which will
+get data from a mySQL Local Server and provide them to my React App to display.
 
-## Core Functionality
+## Core Functionality > Back-end: API Side
 I am going to focus first on building some core aspects of the project and if these are done and 
-there is still time left, then I will move on into extending this functionality.
-
-### Front-End
-The primary focus will be to develop a user interface that will resemble the looks and some of the
-core functionality of a tool like Hive.
-<br> <br>
-![hive-example-img](assets/Hive-status-view-board-example-1400x646.png) 
-<br><br>
-Alternatively some of the UI or functionality can also resemble a tool like Teamwork.
-<br><br>
-![teamwork-example-img](assets/Teamwork-Board-View-Content-Dashboard-Example.png)
-<br><br>
-If there is plenty of time the desired end-goal could be something that resembles a tool like Trello.
-<br><br>
-![trello-example-img](assets/trello-1-1400x951.png)
+there is still time left, then I will move on into extending this functionality. My first focus is
+to be able to have a user create a workspace where he can organise the progress of his project using
+task lists and tasks.
 
 ### ER Diagram
 A user has an email, a password and a display name. A user can have one workspace. A workspace has a 
 name and a due date for its project. A workspace can contain many task lists. A task list has a name 
-and an order. Each task list consists of different tasks. A task has a name, an order and a description.
+and a position. Each task list consists of different tasks. A task has a name, a position and a description.
 <br><br>
 ![er-diagram-img](assets/ER_Diagram.png)
 
@@ -34,9 +22,9 @@ and an order. Each task list consists of different tasks. A task has a name, an 
 - GET /users/{id} <br> Get a specific user by his id.
 #### Workspaces
 - POST /users/{id}/workspaces <br> Create a new workspace for the user of this id.
-- GET /workspaces/{id} <br> Get the workspace of a user by his id.
-- PUT /workspaces/{id} <br> Update the workspace of a user by his id.
-- DELETE /workspaces/{id} <br> Delete the workspace of a user by his id.
+- GET /workspaces/{id} <br> Get a workspace by its id.
+- PUT /workspaces/{id} <br> Update a workspace by its id.
+- DELETE /workspaces/{id} <br> Delete a workspace by his id.
 #### Tasklists
 - POST /workspaces/{id}/tasklists <br> Create a new tasklist for the workspace of this id.
 - GET /workspaces/{id}/tasklists <br> Get all tasklists of a workspace by its id.
