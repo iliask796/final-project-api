@@ -5,5 +5,5 @@ import com.api.project_management.utility.DataResponse;
 
 import java.util.List;
 
-public class TasklistListResponse extends DataResponse<List<Tasklist>> {
+public class ListTasklistResponse extends DataResponse<List<Tasklist>> {
 }

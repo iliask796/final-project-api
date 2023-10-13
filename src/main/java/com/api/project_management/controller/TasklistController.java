@@ -6,7 +6,7 @@ import com.api.project_management.repository.TasklistRepository;
 import com.api.project_management.repository.WorkspaceRepository;
 import com.api.project_management.utility.DataResponse;
 import com.api.project_management.utility.ErrorResponse;
-import com.api.project_management.utility.responses.TasklistListResponse;
+import com.api.project_management.utility.responses.ListTasklistResponse;
 import com.api.project_management.utility.responses.TasklistResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -56,7 +56,7 @@ public class TasklistController {
             error.set("Workspace with this id was not found.");
             return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
         }
-        TasklistListResponse response = new TasklistListResponse();
+        ListTasklistResponse response = new ListTasklistResponse();
         response.set(tasklistList);
         return ResponseEntity.ok(response);
     }
