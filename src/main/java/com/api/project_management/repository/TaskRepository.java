@@ -1,0 +1,8 @@
+package com.api.project_management.repository;
+
+import com.api.project_management.model.Task;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface TaskRepository extends JpaRepository<Task, Integer> {
+    Task findByPosition(int position);
+}
