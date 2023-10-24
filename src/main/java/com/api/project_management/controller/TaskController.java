@@ -76,7 +76,7 @@ public class TaskController {
             int currPos = taskToUpdate.getPosition();
             int swapPos = task.getPosition();
             if (currPos != swapPos) {
-                Task taskToSwap = this.tasks.findByPosition(swapPos);
+                Task taskToSwap = this.tasks.findByPositionAndTasklist(swapPos,taskToUpdate.getTasklist());
                 if (taskToSwap != null) {
                     taskToSwap.setPosition(currPos);
                     this.tasks.save(taskToSwap);
@@ -86,7 +86,7 @@ public class TaskController {
             taskToUpdate = this.tasks.save(taskToUpdate);
         } catch (Exception e){
             ErrorResponse error = new ErrorResponse();
-            error.set("Task update failed. Please check the required fields.");
+            error.set("Task update failed. Please check the required fields."+e);
             return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
         }
         TaskResponse response = new TaskResponse();
