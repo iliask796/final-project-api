@@ -46,7 +46,7 @@ public class TaskController {
     }
 
     @GetMapping("/tasklists/{id}/tasks")
-    public ResponseEntity<DataResponse<?>> getAllTasks(@PathVariable int id){
+    public ResponseEntity<DataResponse<?>> getTasksOfTasklist(@PathVariable int id){
         List<Task> taskList;
         try {
             Tasklist tasklistHasTasks = this.tasklists.findById(id).orElseThrow(NullPointerException::new);
@@ -59,6 +59,16 @@ public class TaskController {
         }
         ListTaskResponse response = new ListTaskResponse();
         response.set(taskList);
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/tasks")
+    public ResponseEntity<ListTaskResponse> getAllTasks() {
+        List<Task> tasksToReturn;
+        tasksToReturn = tasks.findAll();
+        tasksToReturn.sort((t1,t2) -> t1.getPosition().compareTo(t2.getPosition()));
+        ListTaskResponse response = new ListTaskResponse();
+        response.set(tasksToReturn);
         return ResponseEntity.ok(response);
     }
 
@@ -91,6 +101,37 @@ public class TaskController {
         }
         TaskResponse response = new TaskResponse();
         response.set(taskToUpdate);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
+    }
+
+    @PutMapping("/tasks/{id}/move/{listId}")
+    public ResponseEntity<DataResponse<?>> moveTask(@PathVariable int id, @PathVariable int listId){
+        Task taskToMove = this.tasks.findById(id).orElse(null);
+        if (taskToMove == null){
+            ErrorResponse error = new ErrorResponse();
+            error.set("Task with this id was not found.");
+            return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+        }
+        try {
+            Tasklist tasklistAcquiresTask = this.tasklists.findById(listId).orElseThrow(NullPointerException::new);
+            taskToMove.setTasklist(tasklistAcquiresTask);
+            List<Task> targetTasklist = tasklistAcquiresTask.getTasks();
+            targetTasklist.sort((t1,t2) -> t1.getPosition().compareTo(t2.getPosition()));
+            int newPosition;
+            if (targetTasklist.size() > 0) {
+                newPosition = targetTasklist.get(targetTasklist.size()-1).getPosition() + 1;
+            } else {
+                newPosition = 1;
+            }
+            taskToMove.setPosition(newPosition);
+            taskToMove = tasks.save(taskToMove);
+        } catch (NullPointerException e){
+            ErrorResponse error = new ErrorResponse();
+            error.set("Tasklist with this id was not found.");
+            return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+        }
+        TaskResponse response = new TaskResponse();
+        response.set(taskToMove);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
