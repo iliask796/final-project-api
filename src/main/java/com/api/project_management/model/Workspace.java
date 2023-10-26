@@ -22,7 +22,7 @@ public class Workspace {
     private String name;
     @JsonFormat(pattern="MM-dd-yyyy")
     private LocalDate dueDate;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "userId", referencedColumnName = "userId")
     User user;
     @OneToMany(mappedBy = "workspace", orphanRemoval = true)

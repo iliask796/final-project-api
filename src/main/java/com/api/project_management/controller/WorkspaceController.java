@@ -6,13 +6,15 @@ import com.api.project_management.repository.UserRepository;
 import com.api.project_management.repository.WorkspaceRepository;
 import com.api.project_management.utility.DataResponse;
 import com.api.project_management.utility.ErrorResponse;
+import com.api.project_management.utility.responses.ListWorkspaceResponse;
 import com.api.project_management.utility.responses.WorkspaceResponse;
-import jakarta.persistence.EntityExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @CrossOrigin
 @RestController
@@ -27,20 +29,12 @@ public class WorkspaceController {
         Workspace workspaceToCreate;
         try {
             User userHasWorkspace = this.users.findById(id).orElseThrow(NullPointerException::new);
-            if (userHasWorkspace.getWorkspace() != null){
-                throw new EntityExistsException();
-            } else {
-                workspace.setUser(userHasWorkspace);
-                workspaceToCreate = this.workspaces.save(workspace);
-            }
+            workspace.setUser(userHasWorkspace);
+            workspaceToCreate = this.workspaces.save(workspace);
         } catch (NullPointerException e) {
             ErrorResponse error = new ErrorResponse();
             error.set("User with this id was not found.");
             return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
-        } catch (EntityExistsException e) {
-            ErrorResponse error = new ErrorResponse();
-            error.set("Workspace creation failed. Workspace already exists.");
-            return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
         } catch (DataIntegrityViolationException e){
             ErrorResponse error = new ErrorResponse();
             error.set("Workspace creation failed. Please check the required fields.");
@@ -49,6 +43,20 @@ public class WorkspaceController {
         WorkspaceResponse response = new WorkspaceResponse();
         response.set(workspaceToCreate);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/users/{id}/workspaces")
+    public ResponseEntity<DataResponse<?>> getUserWorkspaces(@PathVariable int id){
+        User userHasWorkspaces = this.users.findById(id).orElse(null);
+        if (userHasWorkspaces == null) {
+            ErrorResponse error = new ErrorResponse();
+            error.set("User with this id was not found.");
+            return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+        }
+        List<Workspace> workspacesOfUser = this.workspaces.findByUser(userHasWorkspaces);
+        ListWorkspaceResponse response = new ListWorkspaceResponse();
+        response.set(workspacesOfUser);
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/workspaces/{id}")
