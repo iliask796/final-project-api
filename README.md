@@ -20,8 +20,10 @@ and a position. Each task list consists of different tasks. A task has a name, a
 #### Users
 - POST /users <br> Create a new user.
 - GET /users/{id} <br> Get a specific user by his id.
+- PUT /user/{id} <br> Update user's display name by his id.
 #### Workspaces
 - POST /users/{id}/workspaces <br> Create a new workspace for the user of this id.
+- GET /users/{id}/workspaces <br> Get a user's workspaces by his id.
 - GET /workspaces/{id} <br> Get a workspace by its id.
 - PUT /workspaces/{id} <br> Update a workspace by its id.
 - DELETE /workspaces/{id} <br> Delete a workspace by his id.
@@ -33,7 +35,9 @@ and a position. Each task list consists of different tasks. A task has a name, a
 #### Tasks
 - POST /tasklists/{id}/tasks <br> Create a new task for the tasklist of this id.
 - GET /tasklists/{id}/tasks <br> Get all tasks of a tasklist by its id.
+- GET /tasks <br> Get all tasks.
 - PUT /tasks/{id} <br> Update a task by its id.
+- PUT /tasks/{id}/move/{tasklistId} <br> Move task of id to tasklist of tasklistId.
 - DELETE /tasks/{id} <br> Delete a task by its id.
 <br><br>
 ![endpoints-img](assets/Endpoints.PNG)
