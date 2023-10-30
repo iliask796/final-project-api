@@ -82,8 +82,11 @@ public class WorkspaceController {
         }
         try {
             workspaceToUpdate.setName(workspace.getName());
-            if (workspace.getDueDate() != null){
-                workspaceToUpdate.setDueDate(workspace.getDueDate());
+            if (workspace.getStartDate() != null){
+                workspaceToUpdate.setStartDate(workspace.getStartDate());
+            }
+            if (workspace.getEndDate() != null){
+                workspaceToUpdate.setEndDate(workspace.getEndDate());
             }
             workspaceToUpdate = this.workspaces.save(workspaceToUpdate);
         } catch (DataIntegrityViolationException e){

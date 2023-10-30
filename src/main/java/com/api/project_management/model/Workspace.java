@@ -21,7 +21,9 @@ public class Workspace {
     @Column(nullable = false)
     private String name;
     @JsonFormat(pattern="MM-dd-yyyy")
-    private LocalDate dueDate;
+    private LocalDate startDate;
+    @JsonFormat(pattern="MM-dd-yyyy")
+    private LocalDate endDate;
     @ManyToOne
     @JoinColumn(name = "userId", referencedColumnName = "userId")
     User user;
