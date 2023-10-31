@@ -10,9 +10,9 @@ to be able to have a user create a workspace where he can organise the progress 
 task lists and tasks.
 
 ### ER Diagram
-A user has an email, a password and a display name. A user can have one workspace. A workspace has a 
-name and a due date for its project. A workspace can contain many task lists. A task list has a name 
-and a position. Each task list consists of different tasks. A task has a name, a position and a description.
+A user has an email and a display name. A user can have workspaces. A workspace has a name, a start date
+and an end date for its project. A workspace can contain many task lists. A task list has a name and a 
+position. Each task list consists of different tasks. A task has a name, a position and a description.
 <br><br>
 ![er-diagram-img](assets/ER_Diagram.png)
 
